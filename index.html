@@ -3,14 +3,15 @@
 <head>
 	<meta charset="UTF-8">
 	<title></title>
+<link href="css/index.css" rel="stylesheet" />
 </head>
-<body>
+<body class="loading screen home">
 	<!--位置、背景均可变的logo-->
-	<canvas id="logo"></canvas>
+	<canvas id="logo" width="10" height="10"></canvas>
 	
 	<!--加载的时候透明度变0-->
 	<div id="wrap">
-		<div id="menu"><!--点位父级，不设置宽高-->
+		<div id="menu"><!--定位父级，不设置宽高-->
 			<!--按钮-->
 			<div class="btn">
 				<span></span>
@@ -35,7 +36,7 @@
 			</div>
 		</div>
 		
-		<canvas id="hat"></canvas>
+		<canvas id="hat" width="0" height="0"></canvas>
 		
 		<!--中间轮播图-->
 		<section id="home" class="tBody">

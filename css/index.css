@@ -1,0 +1,86 @@
+/*css reset*/
+body,
+p {
+	margin: 0;
+}
+ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+a {
+	text-decoration: none;
+}
+
+
+/* public css*/
+body {
+	background-color:#fff;
+}
+.screen {
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+.loading {
+	background-color:#000;
+}
+.loading #logo {
+	top: 50%;
+	border-color: #cdcdcd
+	-webkit-transform: translateX(-50%) translateY(-50%) rotate(45deg);
+	transform: translateX(-50%) translateY(-50%) rotate(45deg);
+}
+.loading.home #logo {
+	border-color: #cdcdcd
+}
+.loading #wrap {
+	opacity: 0;
+}
+#logo {
+	position: fixed;
+	top: 0;
+	left: 50%;
+	width: 100px;
+	height: 100px;
+	background-color: #1e1e1e;
+	-webkit-transform: translateX(-50%) rotate(45deg);
+	transform: translateX(-50%) rotate(45deg);
+	z-index: 20;
+	transition: top .7s ease
+}
+body.home #logo {
+	border: 1px solid #cdcdcd;
+	background: #fff
+}
+#wrap {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+#menu {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+#menu .btn {
+	
+}
+@media screen and (max-width: 1200px),
+screen and (max-height: 700px) {
+	#logo {
+		width: 80px;
+		height: 80px;
+	}
+}
+
+
+
+@media screen and (max-width: 991px) {
+	#hat,
+	#logo {
+		/*position: absolute*/
+	}
+}
