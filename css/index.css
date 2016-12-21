@@ -14,6 +14,11 @@ a {
 
 
 /* public css*/
+html,
+body {
+	width: 100%;
+	height: 100%;
+}
 body {
 	background-color:#fff;
 }
@@ -46,7 +51,7 @@ body {
 	background-color: #1e1e1e;
 	-webkit-transform: translateX(-50%) rotate(45deg);
 	transform: translateX(-50%) rotate(45deg);
-	z-index: 20;
+	z-index: 10;
 	transition: top .7s ease
 }
 body.home #logo {
@@ -64,15 +69,143 @@ body.home #logo {
 	position: absolute;
 	top: 0;
 	left: 0;
+	z-index: 20
 }
 #menu .btn {
-	
+	position: absolute;
+	top: 26px;
+	left: 26px;
+	padding: 5px;
+	width: 40px;
+	height: 40px;
+	cursor: pointer;
+	background-color: #fff;
+	z-index: 10;
 }
+#menu .btn div {
+	position: relative;
+	width: 40px;
+	height: 40px;
+}
+#menu .btn span {
+	position: absolute;
+	left: 50%;
+	margin-left: -17px;
+	width: 34px;
+	height: 2px;
+	border-radius: 1px;
+	background-color: #333;
+	-webkit-transform-origin: 33px center;
+	transform-origin: 33px center;
+	-webkit-transition: .8s;
+	transition: .8s;
+}
+#menu .btn .topLine {
+	top: 8px;
+}
+#menu .btn .moddleLine {
+	margin-top: -1px;
+	top: 50%;
+}
+#menu .btn .bottomLine {
+	bottom: 8px;
+}
+#menu .mark {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	background-color: rgba(114,89,47,.9);
+	transition: .5s;
+	opacity: 0;
+	z-index: 1;
+}
+#menu .menuList {
+	position: absolute;
+	top: 50%;
+	left: 0;
+	width: 100%;
+	height: 60%;
+	transform: translateY(-50%);
+	-webkit-transform: translateY(-50%);
+	perspective: 500px;
+	background-color: rgba(114,89,47,.9);
+	z-index: 1;
+}
+#menu .menuList ul {
+	height: 100%;
+	opacity: .4;
+    -webkit-transform: translateY(-25%) rotateX(35deg);
+    transform: translateY(-25%) rotateX(35deg);
+    -webkit-transition: -webkit-transform .5s,opacity .5s;
+    transition: transform .5s,opacity .5s;
+}
+#menu .menuList li {
+	height: 25%;
+}
+#menu .menuList a {
+	display: block;
+	font-family: 'Open Sans';
+	font-size: 48px;
+	font-weight: 600;
+	color: #fff;
+	text-transform: uppercase;
+	transition: all .2s;
+	outline: 0;
+	text-decoration: none
+}
+
+
+
+
+#menu.active .btn span {
+	background-color: rgba(114,89,47,.9);
+}
+#menu.active .btn .topLine {
+	-webkit-transform: translateX(-4px) rotate(-45deg);
+	transform: translateX(-4px) rotate(-45deg);
+}
+#menu.active .btn .moddleLine {
+	opacity: 0;
+}
+#menu.active .btn .bottomLine {
+	-webkit-transform: translateX(-4px) rotate(45deg);
+	transform: translateX(-4px) rotate(45deg);
+}
+#menu.active .mark {
+	opacity: .9;
+}
+#menu.active .menuList.close ul {
+	-webkit-transform: translateY(25%) rotateX(-50deg);
+    transform: translateY(25%) rotateX(-50deg);
+}
+#menu.active .menuList ul {
+	transform: rotateX(0deg);
+	-webkit-transform: rotateX(0deg);
+	opacity: 1;
+}
+
+
 @media screen and (max-width: 1200px),
 screen and (max-height: 700px) {
 	#logo {
 		width: 80px;
 		height: 80px;
+	}
+	#menu .btn {
+		top: 10px;
+		left: 10px;
+		border: 0;
+	}
+}
+
+
+@media (max-width:991px),
+(max-height:700px) {
+	#menu .menuList a {
+		font-size: 36px
 	}
 }
 
@@ -84,3 +217,9 @@ screen and (max-height: 700px) {
 		/*position: absolute*/
 	}
 }
+
+@media screen and (max-width: 640px) {
+	#menu .menuList a {
+		font-size: 28px
+	}
+} 

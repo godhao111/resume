@@ -2,24 +2,27 @@
 <html>
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title></title>
+<link href="css/myfontFace.css" rel="stylesheet" />
 <link href="css/index.css" rel="stylesheet" />
 </head>
-<body class="loading screen home">
+<body class="loaded screen home">
 	<!--位置、背景均可变的logo-->
 	<canvas id="logo" width="10" height="10"></canvas>
 	
-	<!--加载的时候透明度变0-->
-	<div id="wrap">
-		<div id="menu"><!--定位父级，不设置宽高-->
-			<!--按钮-->
-			<div class="btn">
-				<span></span>
-				<span></span>
-				<span></span>
+	<div id="menu"><!--定位父级，不设置宽高 class="active"-->
+		<!--按钮-->
+		<div class="btn">
+			<div>
+				<span class="topLine"></span>
+				<span class="moddleLine"></span>
+				<span class="bottomLine"></span>
 			</div>
-			<div class="mark">
-				<ul class="menuList">
+		</div>
+		<div class="mark">
+			<div class="menuList">
+				<ul>
 					<li>
 						<a href="javascript:;">HOME</a>
 					</li>
@@ -35,6 +38,11 @@
 				</ul>
 			</div>
 		</div>
+	</div>
+	
+	<!--加载的时候透明度变0-->
+	<div id="wrap">
+		
 		
 		<canvas id="hat" width="0" height="0"></canvas>
 		
@@ -103,4 +111,6 @@
 	</div>
 	
 </body>
+<script src="js/jquery-3.1.1.js"></script>
+<script src="js/menu.js"></script>
 </html>
