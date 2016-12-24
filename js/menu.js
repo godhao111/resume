@@ -1,13 +1,10 @@
 $(function(){
 	var $menu = $('#menu');
-	//获取屏幕宽高
-	
-	
-	
 	
 	//设置菜单遮罩的宽高
 	setClient();
 	$(window).on('resize',setClient);
+	
 	function setClient() {
 		var $H = window.innerHeight,
 			$W = window.innerWidth;

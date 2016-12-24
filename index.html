@@ -7,7 +7,7 @@
 <link href="css/myfontFace.css" rel="stylesheet" />
 <link href="css/index.css" rel="stylesheet" />
 </head>
-<body class="loaded screen home">
+<body class="loading screen home">
 	<!--位置、背景均可变的logo-->
 	<canvas id="logo" width="10" height="10"></canvas>
 	
@@ -40,17 +40,18 @@
 		</div>
 	</div>
 	
-	<!--加载的时候透明度变0-->
-	<div id="wrap">
+	
 		
 		
-		<canvas id="hat" width="0" height="0"></canvas>
-		
-		<!--中间轮播图-->
-		<section id="home" class="tBody">
+	<canvas id="hat" width="0" height="0"></canvas>
+	
+	<!--中间轮播图-->
+	<section id="wrap">
+		<div id="home" class="tBody">
 			<span class="prev"></span>
 			<span class="next"></span>
-			<ul id="">
+			<ul class="productList">
+				<li><img src="img/16.jpg"/></li>
 				<li><img src="img/16.jpg"/></li>
 			</ul>
 			<p class="subCode">
@@ -59,44 +60,49 @@
 				<i></i>
 				<i></i>
 			</p>
-		</section>
-		
-		<!--底部页面展示-->
-		<div id="footer">
-			<div id="nav">
-				<canvas class="navBg"></canvas>
-				<div class="navList">
-					<a class="active home" href="javascript:;"></a>
-					<a class="works" href="javascript:;"></a>
-					<a class="about" href="javascript:;"></a>
-					<a class="contact" href="javascript:;"></a>
-				</div>
-			</div>
-			<ul class="blogroll">
-				<li>
-					<a href="javascript:;"></a>
-					<span></span>
-				</li>
-				<li>
-					<a href="javascript:;"></a>
-					<span></span>
-				</li>
-				<li>
-					<a href="javascript:;"></a>
-					<span></span>
-				</li>
-				<li>
-					<a href="javascript:;"></a>
-					<span></span>
-				</li>
-			</ul>
-			<!--网站声明-->
-			<p class="declaraction"></p>
-			<canvas id="shoes"></canvas>
 		</div>
+	</section>
+	<!--底部页面展示-->
+	<div id="footer">
+		<div id="nav">
+			<canvas class="navBg" width="0" height="0"></canvas>
+			<div class="navList">
+				<a class="active home" href="javascript:;"></a>
+				<a class="works" href="javascript:;"></a>
+				<a class="about" href="javascript:;"></a>
+				<a class="contact" href="javascript:;"></a>
+			</div>
+		</div>
+		<ul class="blogroll">
+			<li class="linkOne">
+				<a href="javascript:;">
+					<span></span>
+				</a>
+			</li>
+			<li class="linkTwo">
+				<a href="javascript:;">
+					<span></span>
+				</a>
+			</li>
+			<li class="linkThree">
+				<a href="javascript:;">
+					<span></span>
+				</a>
+			</li>
+			<li class="linkFour">
+				<a href="javascript:;">
+					<span></span>
+				</a>
+			</li>
+		</ul>
 		
-		<!--中间方形的提示-->
-		<div id="hint">
+		<p class="declaraction">本网站作者: 张兵军.一个勤奋、上进、靠谱的才女</p>
+		<canvas id="shoes"></canvas>
+	</div>
+	
+	<!--中间方形的提示-->
+	<div id="hint">
+		<div class="content">
 			<canvas class="showText"></canvas>
 			<div class="smallSwitch">
 				<span class="line"></span>
@@ -107,10 +113,11 @@
 			</div>
 			<a href="javascript:;">website</a>
 		</div>
-		
 	</div>
-	
+
 </body>
 <script src="js/jquery-3.1.1.js"></script>
 <script src="js/menu.js"></script>
+<script src="js/public.js"></script>
+<script src="js/index.js"></script>
 </html>

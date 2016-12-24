@@ -18,6 +18,10 @@ html,
 body {
 	width: 100%;
 	height: 100%;
+	overflow: hidden;
+}
+body *{
+	box-sizing: border-box;
 }
 body {
 	background-color:#fff;
@@ -28,7 +32,7 @@ body {
 	position: relative;
 }
 .loading {
-	background-color:#000;
+	background-color:#fff;
 }
 .loading #logo {
 	top: 50%;
@@ -39,43 +43,51 @@ body {
 .loading.home #logo {
 	border-color: #cdcdcd
 }
-.loading #wrap {
+.loading #menu,
+.loading #hat,
+.loading #home,
+.loading #footer, 
+.loading #hint {
 	opacity: 0;
+}
+.loaded #menu,
+.loaded #hat,
+.loaded #home,
+.loaded #footer, 
+.loaded #hint {
+	opacity: 1;
 }
 #logo {
 	position: fixed;
-	top: 0;
+	top: 30px;
 	left: 50%;
 	width: 100px;
 	height: 100px;
 	background-color: #1e1e1e;
 	-webkit-transform: translateX(-50%) rotate(45deg);
 	transform: translateX(-50%) rotate(45deg);
-	z-index: 10;
-	transition: top .7s ease
+	z-index: 90;
+	transition: top .7s ease;
+	-webkit-transition: top .7s ease;
 }
 body.home #logo {
 	border: 1px solid #cdcdcd;
 	background: #fff
 }
-#wrap {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
+body.work #header,
+body.work #footer {
+	height: 100px;
 }
 #menu {
 	position: absolute;
 	top: 0;
 	left: 0;
-	z-index: 20
+	z-index: 110
 }
 #menu .btn {
 	position: absolute;
 	top: 26px;
 	left: 26px;
-	padding: 5px;
 	width: 40px;
 	height: 40px;
 	cursor: pointer;
@@ -119,8 +131,10 @@ body.home #logo {
 	text-align: center;
 	background-color: rgba(114,89,47,.9);
 	transition: .5s;
+	-webkit-transition: .5s;
 	opacity: 0;
 	z-index: 1;
+	display: none;
 }
 #menu .menuList {
 	position: absolute;
@@ -131,7 +145,6 @@ body.home #logo {
 	transform: translateY(-50%);
 	-webkit-transform: translateY(-50%);
 	perspective: 500px;
-	background-color: rgba(114,89,47,.9);
 	z-index: 1;
 }
 #menu .menuList ul {
@@ -146,7 +159,7 @@ body.home #logo {
 	height: 25%;
 }
 #menu .menuList a {
-	display: block;
+	display: inline-block;
 	font-family: 'Open Sans';
 	font-size: 48px;
 	font-weight: 600;
@@ -176,6 +189,7 @@ body.home #logo {
 }
 #menu.active .mark {
 	opacity: .9;
+	display: block;
 }
 #menu.active .menuList.close ul {
 	-webkit-transform: translateY(25%) rotateX(-50deg);
@@ -186,6 +200,296 @@ body.home #logo {
 	-webkit-transform: rotateX(0deg);
 	opacity: 1;
 }
+#hat {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 35%;
+	background-color: #fff;
+	z-index: 20;
+	cursor: normal;
+}
+
+
+#wrap {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+}
+#home {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+}
+#home .prev,
+#home .next {
+	position: absolute;
+	top: 0;
+	width: 15%;
+	height: 100%;
+	z-index: 10;
+}
+#home .prev {
+	left: 0;
+	cursor: url(../img/bg/arrow-left.png),pointer;
+}
+#home .next {
+	right: 0;
+	cursor: url(../img/bg/arrow-right.png),pointer;
+}
+#home .productList {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 200%;
+	z-index: 5;
+}
+#home .productList li {
+	position: absolute;
+	height: 100%;
+	width: 50%;
+	overflow: hidden;
+}
+#home .productList img {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	height: 100%;
+	width: auto;
+	transform: translateX(-50%);
+	-webkit-transform: translateX(-50%);
+	min-width: 100%;
+}
+#home .subCode {
+	position: absolute;
+	top: 70%;
+	left: 0;
+	width: 100%;
+	height: 10px;
+	text-align: center;
+	z-index: 100;
+}
+#home .subCode i {
+	display: inline-block;
+	width: 6px;
+    height: 6px;
+    margin: 2px 2px;
+    border: 1px solid #222;
+    vertical-align: top;
+    cursor: pointer;
+    background-color: #fff;
+    transform-origin: center center;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+#home .subCode .active {
+	    background: #222;
+}
+#footer,
+#shoes {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 35%;
+	/*background-color: #fff;*/
+	
+}
+#shoes {
+	z-index: 10;
+}
+#nav {
+	position: absolute;
+	left: 50%;
+	bottom: 20px;
+	padding: 34px;
+	width: 160px;
+    height: 160px;
+	transform:translateX(-50%);
+	-webkit-transform: translateX(-50%);
+	z-index: 105;
+}
+#nav .navList {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -46px;
+	margin-left: -46px;
+	width: 92px;
+    height: 92px;
+	z-index: 100;
+	transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+    transition: all .7s ease;
+    -webkit-transition: all .7s ease;
+}
+#nav .navList a {
+	float: left;
+	margin: 8px;
+	width: 30px;
+	height: 30px;
+	background: url(../img/bg/nav.png) no-repeat;
+	transform-origin: 50% 50%;
+	transform: rotate(-45deg);
+	-webkit-transform: rotate(-45deg);
+	transition: all .7s ease;
+    -webkit-transition: all .7s ease;
+}
+
+#nav .navList a.active:hover {
+	background-position-y: -60px;
+}
+#nav .navList a.home {
+	background-position: 0 0;
+}
+#nav .navList a.home.active {
+	background-position: 0 -60px;
+}
+#nav .navList a.contact {
+	background-position: -30px 0;
+}
+#nav .navList a.about {
+	background-position: -60px 0;
+}
+#nav .navList a.works {
+	background-position: -90px 0;
+}
+#nav .navList a:hover {
+	background-position-y: -30px;
+}
+#nav .navBg {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -60px;
+	margin-left: -60px;
+	width: 120px;
+    height: 120px;
+	z-index: 200;
+	-webkit-transform: rotate(45deg);
+	transform: rotate(45deg);
+	transition: all .7s ease;
+	background-color: #fff;
+	z-index: 2
+}
+#footer .blogroll {
+	position: absolute;
+	bottom: 15px;
+	right: 40px;
+	margin-bottom: 10px;
+    z-index: 20;
+    transition: all .7s ease; 
+}
+#footer .blogroll li {
+	position: relative;
+	float: left;
+	margin-left: 12px;
+	width: 30px;
+	height: 30px;
+}
+#footer .blogroll a {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 30px;
+	height: 30px;
+	-webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    transition: all .7s ease;
+    -webkit-transition: all .7s ease;
+    background-color: #fff;
+}
+#footer .blogroll span {
+	position: absolute;
+	top: 0;
+	left: 0;
+    width: 30px;
+    height: 30px;
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    transition: all .7s ease;
+    background: url(../img/bg/linkIcons.png) no-repeat;
+}
+#footer .linkOne span {
+	background-position: -60px 0;
+}
+#footer .linkTwo span {
+	background-position: 0 0;
+}
+#footer .linkThree span {
+	background-position: -30px 0;
+}
+#footer .linkFour span {
+	background-position: -90px 0;
+}
+#footer .blogroll a:hover {
+	-webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    background-color: #1a2530;
+}
+#footer .blogroll a:hover span {
+	background-position-y:-30px;
+	-webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+#footer .declaraction {
+	position: absolute;
+    left: 0;
+    bottom: 5px;
+    width: 100%;
+    z-index: 999;
+    font-family: arial,sans-serif;
+    font-size: 9px;
+    font-weight: 300;
+    color: #666;
+    text-align: center;
+}
+
+#shoes {
+	background-color: #fff;
+	height: 100%;
+}
+
+#hint {
+	position: absolute;
+	top: 40%;
+	left: 50%;
+	z-index: 80;
+	width: 0;
+	height: 0;
+	background-color: #ccc;
+	transform: translateX(-50%) rotate(45deg);
+	-webkit-transform: translateX(-50%) rotate(45deg);
+	opacity: 0;
+	overflow: hidden;
+}
+#hint .content {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	transform: rotate(-45deg);
+	-webkit-transform: rotate(-45deg);
+}
+#hint .showText {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	-webkit-transform: translate(-50%,-50%);
+	width: 70%;
+	height: 70%;
+	background-color: #fff;
+}
+
 
 
 @media screen and (max-width: 1200px),
@@ -198,6 +502,20 @@ screen and (max-height: 700px) {
 		top: 10px;
 		left: 10px;
 		border: 0;
+	}
+	#nav {
+		bottom: -8px;
+	}
+	#nav .navBg {
+		width: 100px;
+		height: 100px;
+		padding: 20px;
+		
+		margin-top: -50px;
+		margin-left: -50px;
+	}
+	#nav .blogroll {
+		bottom: 45px;
 	}
 }
 
