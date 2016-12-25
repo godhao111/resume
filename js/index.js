@@ -8,8 +8,7 @@ var data = ['img/16.jpg','img/17.jpg','img/18.jpg','img/3.jpg','img/4.jpg'];
 			if ( num === data.length ) {
 				
 				$(document.body).removeClass('loading').addClass('loaded');
-				setTimeout(setSquareHeight,800)
-				//setSquareHeight();
+				setTimeout(setSquareHeight,800);
 			}
 		})
 	})

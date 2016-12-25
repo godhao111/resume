@@ -252,7 +252,8 @@ body.work #footer {
 	z-index: 5;
 }
 #home .productList li {
-	position: absolute;
+	float: left;
+	position: relative;
 	height: 100%;
 	width: 50%;
 	overflow: hidden;
@@ -280,7 +281,7 @@ body.work #footer {
 	display: inline-block;
 	width: 6px;
     height: 6px;
-    margin: 2px 2px;
+    margin: 2px 3px;
     border: 1px solid #222;
     vertical-align: top;
     cursor: pointer;
