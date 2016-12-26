@@ -6,8 +6,8 @@ $(function(){
 	$(window).on('resize',setClient);
 	
 	function setClient() {
-		var $H = window.innerHeight,
-			$W = window.innerWidth;
+		$H = window.innerHeight;
+		$W = window.innerWidth;
 		$menu.find('.mark').css({'width':$W,'height':$H});
 	}
 	//点击菜单按钮，显示菜单

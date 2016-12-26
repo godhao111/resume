@@ -1,10 +1,10 @@
 (function(){
-	function TabImg(id) {
+	window.TabImg = function(id) {
 		this.obj = document.getElementById(id);
 		this.index = 0;
 		this.timer = null;
 		this.subCode = null;
-		this.width = this.obj.clientWidth;
+		this.width = document.documentElement.clientWidth || document.body.clientWidth;
 		this.settings = {
 			data: [],
 			imgParObj: null,
@@ -23,8 +23,11 @@
 		this.setTime();
 		this.overOutPar();
 		this.touchMove();
-		this.settings.callBack();
 		
+		var _this = this;
+		window.onresize = function () {
+			_this.width = document.documentElement.clientWidth || document.body.clientWidth;
+		}
 		this.imgs = this.settings.imgParObj.getElementsByTagName('img');
 	}
 	TabImg.prototype.touchMove = function () {
@@ -79,6 +82,7 @@
 		this.obj.addEventListener('mouseleave',function(){
 			clearInterval(_this.timer);
 			_this.timer = setInterval(function(){
+				_this.settings.callBack();
 				_this.nextBtn();
 			},1600)
 		});
@@ -87,6 +91,7 @@
 		var _this = this;
 		clearInterval(this.timer);
 		this.timer = setInterval(function(){
+			_this.settings.callBack();
 			_this.nextBtn();
 		},1600)
 	}
@@ -136,9 +141,6 @@
 		move.mTween(this.settings.imgParObj,{'translateX': 0},400,'linear');
 		this.index = num;
 	}
-	TabImg.prototype.imgTab = function () {
-		
-	}
 	
 	TabImg.prototype.subCodeClear = function (num) {
 		for ( var i=0; i<this.subCode.length; i++ ) {
@@ -148,7 +150,7 @@
 	}
 	
 	TabImg.prototype.randerSubCode = function () {
-		
+		this.settings.subParCode.innerHTML = '';
 		this.subCode = this.settings.subParCode.getElementsByTagName(this.settings.subTag);
 		for ( var i=0; i<this.settings.data.length; i++ ) {
 			var tag = document.createElement(this.settings.subTag);
@@ -161,14 +163,5 @@
 	}
 	
 	
-	var $tabHome = $('#home');
-	var imgTab = new TabImg('home');
 	
-	imgTab.init({
-		data: ['img/16.jpg','img/17.jpg','img/18.jpg','img/3.jpg','img/4.jpg'],
-		imgParObj: $tabHome.find('.productList')[0],
-		subParCode: $tabHome.find('.subCode')[0],
-		nextBtn: $tabHome.find('.next')[0],
-		prevBtn: $tabHome.find('.prev')[0]
-	})
 })()
