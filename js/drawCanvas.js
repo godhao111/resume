@@ -34,7 +34,8 @@
 		cxt.fill();
 	}
 	
-	global.drawNav = function (id) {
+	global.drawNav = function (id,de) {
+		de = de || 0;
 		var c = document.getElementById(id);
 		var W = c.offsetWidth/10,
 			H = c.offsetHeight/10;
@@ -43,7 +44,7 @@
 		var cxt = c.getContext('2d');
 		console.log()
 		cxt.translate(5*W,5*H);
-		/*cxt.rotate(-Math.PI*45/180);*/
+		cxt.rotate(-Math.PI*de/180);
 		cxt.save();
 		cxt.beginPath();
 		cxt.lineTo(-5*W,-5*H);

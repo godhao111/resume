@@ -46,10 +46,24 @@ var data = ['img/16.jpg','img/17.jpg','img/18.jpg','img/3.jpg','img/4.jpg'];
 	fnProductList()
 	
 	
+	navRound('nav');
 	//点击导航,导航旋转
 	function navRound(id) {
-		var nav = document.getElementById(id);
-		
+		var $nav = $('#'+id);
+		var $a = $nav.find('.navList').find('a');
+		$a.off('click').on('click',function(){
+			if ( !$(this).hasClass('active') ) {
+				$(this).addClass('active').siblings().removeClass('active');
+				console.log($(this).index())
+				move.mTween($nav.find('.navBase')[0],{'rotate':-($(this).index()*90-45)},200,'linear');
+				move.mTween($nav.find('.navBg')[0],{'rotate':-($(this).index()*90)},200,'linear');
+				move.mTween($nav.find('.navList')[0],{'rotate':-($(this).index()*90-45)},200,'linear');
+				for ( var i=0; i<$a.length; i++ ) {
+					move.mTween($a[i],{'rotate':-($(this).index()*90-45)+90},300,'linear');
+				}
+				//$a.css({'transform': 'rotate('+($(this).index()*90-45)+'deg)','-webkit-transform': 'rotate('+($(this).index()*90-45)+'deg)'});
+			}
+		})
 	}
 	
 	

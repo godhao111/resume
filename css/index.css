@@ -313,6 +313,7 @@ body.work #footer {
 	padding: 34px;
 	width: 160px;
     height: 160px;
+    transform-origin: center center;
 	transform:translateX(-50%);
 	-webkit-transform: translateX(-50%);
 	z-index: 105;
@@ -326,13 +327,16 @@ body.work #footer {
 	margin-left: -46px;
 	width: 92px;
     height: 92px;
-	z-index: 100;
 	transform: rotate(45deg);
 	-webkit-transform: rotate(45deg);
     transition: all .7s ease;
     -webkit-transition: all .7s ease;
 }
+#nav .navList {
+	z-index: 210;
+}
 #nav .navBase {
+	z-index: 100;
 	background-color: #fff;
 }
 #nav .navList a {
@@ -344,17 +348,11 @@ body.work #footer {
 	transform-origin: 50% 50%;
 	transform: rotate(-45deg);
 	-webkit-transform: rotate(-45deg);
-	transition: all .7s ease;
-    -webkit-transition: all .7s ease;
-}
-#nav .navList a.active:hover {
-	background-position-y: -60px;
+	/*transition: all .7s ease;
+    -webkit-transition: all .7s ease;*/
 }
 #nav .navList a.home {
 	background-position: 0 0;
-}
-#nav .navList a.home.active {
-	background-position: 0 -60px;
 }
 #nav .navList a.contact {
 	background-position: -30px 0;
@@ -368,6 +366,13 @@ body.work #footer {
 #nav .navList a:hover {
 	background-position-y: -30px;
 }
+#nav .navList a.active {
+	background-position-y: -60px;
+}
+#nav .navList a.active:hover {
+	background-position-y: -60px;
+}
+
 #nav .navBg {
 	position: absolute;
 	top: 50%;
