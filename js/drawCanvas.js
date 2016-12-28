@@ -4,7 +4,8 @@
 	var wH = document.documentElement.clientHeight || document.body.clientHeight;
 	var wW = document.documentElement.clientWidth || document.body.clientWidth;
 	
-	global.drawLogo = function (id) {
+	global.drawLogo = function (id,color) {
+		color = color || '#1e1e1e';
 		var c = document.getElementById(id);
 		var W = c.offsetWidth/10,
 			H = c.offsetHeight/10;
@@ -29,7 +30,7 @@
 		cxt.lineTo(-2.5*W,-2*H);
 		cxt.lineTo(-3*W,-3*H);
 		
-		cxt.fillStyle='#000';
+		cxt.fillStyle=color;
 		cxt.lineCap = 'round';
 		cxt.fill();
 	}
@@ -80,7 +81,8 @@
 		//this.onOff = false;
 		this.settings = {
 			onOff: false,
-			time: 600
+			time: 600,
+			color: '#fff'
 		}
 		this.loadingData = [
 				{
@@ -213,7 +215,7 @@
 				this.cxt.lineTo(arr[i].x,arr[i].y);
 			}
 			
-			this.cxt.fillStyle='#fff';
+			this.cxt.fillStyle= this.settings.color;
 			this.cxt.fill();
 			this.cxt.closePath();
 			this.cxt.restore();

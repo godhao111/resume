@@ -11,7 +11,9 @@ ul {
 a {
 	text-decoration: none;
 }
-
+img {
+	vertical-align: middle;
+}
 
 /* public css*/
 html,
@@ -34,6 +36,9 @@ body {
 .loading {
 	background-color:#fff;
 }
+/*.loading.works {
+	background-color:#1e1e1e;
+}*/
 .loading #logo {
 	top: 50%;
 	border-color: #cdcdcd
@@ -41,18 +46,18 @@ body {
 	transform: translateX(-50%) translateY(-50%) rotate(45deg);
 }
 .loading.home #logo {
-	border-color: #cdcdcd
+	border-color: #cdcdcd;
 }
 .loading #menu,
 .loading #hat,
-.loading #home,
+.loading #wrap,
 .loading #footer, 
 .loading #hint {
 	opacity: 0;
 }
 .loaded #menu,
 .loaded #hat,
-.loaded #home,
+.loaded #wrap,
 .loaded #footer, 
 .loaded #hint {
 	opacity: 1;
@@ -63,19 +68,22 @@ body {
 	left: 50%;
 	width: 100px;
 	height: 100px;
-	background-color: #1e1e1e;
 	-webkit-transform: translateX(-50%) rotate(45deg);
 	transform: translateX(-50%) rotate(45deg);
 	z-index: 90;
 	transition: top .7s ease;
 	-webkit-transition: top .7s ease;
 }
-body.home #logo {
+body.home #logo{
 	border: 1px solid #cdcdcd;
 	background: #fff
 }
-body.work #header,
-body.work #footer {
+body.works #logo {
+	background-color: #1e1e1e;
+	border: 1px solid #1e1e1e;
+}
+body.works #header,
+body.works #footer {
 	height: 100px;
 }
 #menu {
@@ -91,9 +99,13 @@ body.work #footer {
 	width: 40px;
 	height: 40px;
 	cursor: pointer;
-	background-color: #fff;
 	z-index: 10;
 }
+.home #menu .btn,
+#menu.active .btn {
+	background-color: #fff;
+}
+
 #menu .btn div {
 	position: relative;
 	width: 40px;
@@ -106,11 +118,18 @@ body.work #footer {
 	width: 34px;
 	height: 2px;
 	border-radius: 1px;
-	background-color: #333;
+	
 	-webkit-transform-origin: 33px center;
 	transform-origin: 33px center;
 	-webkit-transition: .8s;
 	transition: .8s;
+}
+.home #menu .btn span,
+#menu.active .btn span {
+	background-color: #333;
+}
+.works #menu .btn span {
+	background-color: #fff;
 }
 #menu .btn .topLine {
 	top: 8px;
@@ -220,11 +239,13 @@ body.work #footer {
 	width: 100%;
 	overflow: hidden;
 }
+.tBody {
+	height: 100%;
+}
 #home {
 	position: absolute;
 	top: 0;
 	left: 0;
-	height: 100%;
 	width: 100%;
 }
 #home .prev,
@@ -293,6 +314,36 @@ body.work #footer {
 #home .subCode .active {
 	background: #222;
 }
+#works {
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin-top: 100px;
+	transition: .1s;
+}
+#works:after {
+	content: '';
+	display: block;
+	clear: both;
+}
+#works li {
+	float: left;
+	width: 50%;
+	overflow: hidden;
+}
+#works a {
+	display: block;
+	width: 100%;
+	transition: 3.3s ease all;
+	-webkit-transition: 3.3s ease all;
+}
+#works img {
+	width: 100%;
+	height: auto;
+}
+	
+	
+	
 #footer,
 #shoes {
 	position: absolute;
@@ -327,10 +378,10 @@ body.work #footer {
 	margin-left: -46px;
 	width: 92px;
     height: 92px;
-	transform: rotate(45deg);
-	-webkit-transform: rotate(45deg);
-    transition: all .7s ease;
-    -webkit-transition: all .7s ease;
+	/*transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);*/
+    /*transition: all .7s ease;
+    -webkit-transition: all .7s ease;*/
 }
 #nav .navList {
 	z-index: 210;
@@ -345,11 +396,14 @@ body.work #footer {
 	width: 30px;
 	height: 30px;
 	background: url(../img/bg/nav.png) no-repeat;
-	transform-origin: 50% 50%;
-	transform: rotate(-45deg);
-	-webkit-transform: rotate(-45deg);
+	/*transform-origin: 50% 50%;*/
+	/*transform: rotate(-45deg);
+	-webkit-transform: rotate(-45deg);*/
 	/*transition: all .7s ease;
     -webkit-transition: all .7s ease;*/
+}
+#nav .navList a:nth-of-type(3) {
+	float: right;
 }
 #nav .navList a.home {
 	background-position: 0 0;
@@ -382,7 +436,7 @@ body.work #footer {
 	width: 120px;
     height: 120px;
 	z-index: 200;
-	transition: all .7s ease;
+	/*transition: all .7s ease;*/
 }
 #footer .blogroll {
 	position: absolute;
@@ -522,8 +576,11 @@ screen and (max-height: 700px) {
 	#nav .blogroll {
 		bottom: 45px;
 	}
+	#works {
+		margin-top: 70px;
+		margin-bottom: 70px;
+	}
 }
-
 
 @media (max-width:991px),
 (max-height:700px) {
@@ -538,6 +595,10 @@ screen and (max-height: 700px) {
 	#hat,
 	#logo {
 		/*position: absolute*/
+	}
+	
+	#works li {
+		width: 100%;
 	}
 }
 
