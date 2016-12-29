@@ -99,6 +99,30 @@ var data = ['img/16.jpg','img/17.jpg','img/18.jpg','img/3.jpg','img/4.jpg'];
 		}
 	}(window,document);
 	
+	//works页面个性化方法
+	void function (w,d,factory) {
+		var $tabAbout = $('#about');
+		var $tabContact = $('#contact');
+		
+		factory(w,d,$tabAbout);
+		factory(w,d,$tabContact);
+		
+	}(window,document,function(w,d,$obj){
+		if ( $obj[0] ) {
+			//setTimeout(function(){
+				
+				$('#hint').css({
+					/*'transition': 'all .5s',
+					'-webkit-transition': 'all .5s',*/
+					'opacity': '1',
+					'width':$('#hint').prop('width'),
+					'height':$('#hint').prop('width'),
+					'top': $('#hint').prop('top')
+				});
+			//},950);
+		}
+	});
+	
 	
 	function allCanvas() {	
 		if ( $body.hasClass('home') ) {
@@ -106,7 +130,12 @@ var data = ['img/16.jpg','img/17.jpg','img/18.jpg','img/3.jpg','img/4.jpg'];
 			
 			hat.init({now:'loadedData',last:'loadingData'},{time:700});
 			shoes.init({now:'loadedData',last:'loadingData'},{onOff:true,time:700});
-		} else if ($body.hasClass('works')) {
+		} else if ($body.hasClass('works') ) {
+			drawLogo('logo','#fff');
+			
+			hat.init({now:'activeData',last:'loading'},{time:700,color:'#1e1e1e'});
+			shoes.init({now:'activeData',last:'loadingData'},{onOff:true,time:700});
+		} else if ( $body.hasClass('about') || $body.hasClass('contact') ) {
 			drawLogo('logo','#fff');
 			
 			hat.init({now:'activeData'},{time:700,color:'#1e1e1e'});
@@ -172,7 +201,6 @@ var data = ['img/16.jpg','img/17.jpg','img/18.jpg','img/3.jpg','img/4.jpg'];
 		var c = $NavTop+$NavHeight-$top;
 		
 		var a = Math.sqrt(Math.pow(c,2)/2);
-		
 		$('#hint').css({
 					'transition': '',
 					'-webkit-transition': ''
@@ -185,17 +213,22 @@ var data = ['img/16.jpg','img/17.jpg','img/18.jpg','img/3.jpg','img/4.jpg'];
 	}
 	//页面进来图片加载
 	function loading() {
-		var num = 0;
-		$(data).each(function(i,e){
-			var $img = $('<img src="'+e+'"/>');
-			$img.off().on('load',function(){
-				num ++;
-				if ( num === data.length ) {
-					$body.removeClass('loading').addClass('loaded');
-					setTimeout(setSquareHeight,800);
-				}
+		if ( $body.hasClass('loading') ) {
+			var num = 0;
+			$(data).each(function(i,e){
+				var $img = $('<img src="'+e+'"/>');
+				$img.off().on('load',function(){
+					num ++;
+					if ( num === data.length ) {
+						$body.removeClass('loading').addClass('loaded');
+						setTimeout(setSquareHeight,800);
+					}
+				})
 			})
-		})
+		} else {
+			setSquareHeight();
+		}
+		
 	}
 	
 })()

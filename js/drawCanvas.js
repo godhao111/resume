@@ -84,6 +84,28 @@
 			time: 600,
 			color: '#fff'
 		}
+		this.loading = [
+				{
+					x: -5*this.W,
+					y: -5*this.H
+				},
+				{
+					x: this.W*5,
+					y: -5*this.H
+				},
+				{
+					x: this.W*5,
+					y: 5*this.H
+				},
+				{
+					x: 0,
+					y: this.H*5
+				},
+				{
+					x: -5*this.W,
+					y: 5*this.H
+				}
+			];
 		this.loadingData = [
 				{
 					x: -5*this.W,
@@ -227,13 +249,4 @@
 	global.drawHat = DrawHat;
 
 
-})
-/*drawLogo('logo');
-
-var hat = new drawHat('hat');
-hat.init({now:'loadedData',last:'loadingData'});
-
-var shoes = new drawHat('shoes');
-shoes.init({now:'loadedData',last:'loadingData'},true);
-
-drawNav('navConvas');*/
+});

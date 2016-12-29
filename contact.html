@@ -7,7 +7,7 @@
 <link href="css/myfontFace.css" rel="stylesheet" />
 <link href="css/index.css" rel="stylesheet" />
 </head>
-<body class="loading screen home">
+<body class="loaded screen contact">
 	<!--位置、背景均可变的logo-->
 	<canvas id="logo" width="10" height="10"></canvas>
 	
@@ -47,19 +47,8 @@
 	
 	<!--中间轮播图-->
 	<section id="wrap">
-		<div id="home" class="tBody">
-			<span class="prev"></span>
-			<span class="next"></span>
-			<ul class="productList">
-				<li><img src="img/16.jpg"/></li>
-				<li><img src="img/17.jpg"/></li>
-			</ul>
-			<p class="subCode">
-				<!--<i class="active"></i>
-				<i></i>
-				<i></i>
-				<i></i>-->
-			</p>
+		<div id="contact" class="tBody" style="transform: translateY(0);">
+			
 		</div>
 	</section>
 	<!--底部页面展示-->
@@ -68,11 +57,10 @@
 			<div class="navBase"></div>
 			<canvas id="navConvas" class="navBg" width="0" height="0"></canvas>
 			<div class="navList">
-				<a class="active home" href="javascript:;"></a>
+				<a class="active contact" href="javascript:;"></a>
+				<a class="home" href="javascript:;"></a>
 				<a class="works" href="javascript:;"></a>
 				<a class="about" href="javascript:;"></a>
-				<a class="contact" href="javascript:;"></a>
-				
 			</div>
 		</div>
 		<ul class="blogroll">
@@ -105,7 +93,10 @@
 	<!--中间方形的提示-->
 	<div id="hint">
 		<div class="content">
-			<canvas class="showText"></canvas>
+			<ul class="showText">
+				<li>个人介绍<i></i></li>
+				<li>个人介绍</li>
+			</ul>
 			<div class="smallSwitch">
 				<span class="line"></span>
 				<i class="leftOne"></i>

@@ -78,9 +78,19 @@ body.home #logo{
 	border: 1px solid #cdcdcd;
 	background: #fff
 }
-body.works #logo {
+body.works #logo,
+body.about #logo, 
+body.contact #logo {
 	background-color: #1e1e1e;
 	border: 1px solid #1e1e1e;
+}
+body.about, 
+body.contact {
+	background: url(../img/bg/about-contact.jpg) center no-repeat fixed;
+	background-size: cover;
+	-webkit-background-size: cover;
+	transition: background-position 2s ease;
+	-webkit-transition: background-position 2s ease;
 }
 body.works #header,
 body.works #footer {
@@ -523,11 +533,14 @@ body.works #footer {
 	z-index: 80;
 	width: 0;
 	height: 0;
-	background-color: #ccc;
+	background-color: #fff;
 	transform: translateX(-50%) rotate(45deg);
 	-webkit-transform: translateX(-50%) rotate(45deg);
 	opacity: 0;
 	overflow: hidden;
+}
+body.contact #hint {
+	background-color: rgba(26,50,56,.95);
 }
 #hint .content {
 	position: absolute;
