@@ -35,63 +35,73 @@
 		this.settings.nextBtn && this.nextPrevBtn();
 		this.setTime();
 		this.overOutPar();
-		this.touchMove();
+		this.touchFn();
 		
 		var _this = this;
-		window.onresize = function () {
+		/*window.onresize = function () {
 			_this.width = document.documentElement.clientWidth || document.body.clientWidth;
-		}
+		}*/
 		this.imgs = this.settings.imgParObj.getElementsByTagName('img');
 	}
-	TabImg.prototype.touchMove = function () {
-		var startX = 0;
-		var disX = 0;
-		var num = 0;
+	TabImg.prototype.touchFn = function () {
+		var startX, disX, num = 0;
 		var _this = this;
 		this.settings.imgParObj.addEventListener('touchstart',function(ev){
-			var touchs = ev.changedTouches[0];
-			startX = touchs.pageX;
-			clearInterval(_this.timer)
+			startX = _this.touchStart(ev);
 		});
 		this.settings.imgParObj.addEventListener('touchmove',function(ev){
-			var touchs = ev.changedTouches[0];
-			disX = touchs.pageX - startX;
-			if ( disX>0 ) {
-				num = _this.index -1;
-				num = num<0? _this.settings.data.length-1: num;
-				
-				_this.imgs[1].src = _this.settings.data[_this.index];
-				
-				_this.imgs[0].src = _this.settings.data[num];
-				move.css(_this.settings.imgParObj,'translateX',-_this.width+disX);
-			
-			} else if ( disX<0 ) {
-				num = _this.index +1;
-				num %= _this.settings.data.length;
-				
-				_this.imgs[0].src = _this.settings.data[_this.index];
-				
-				_this.imgs[1].src = _this.settings.data[num];
-				move.css(_this.settings.imgParObj,'translateX',disX);
-			}
+			disX = _this.touchsMove(ev,disX,startX);
 		});
 		this.settings.imgParObj.addEventListener('touchend',function(){
-			if ( Math.abs(disX) >= _this.width/3 ) {
-				disX>0? move.mTween(_this.settings.imgParObj,{'translateX': 0},400,'linear'):
-					move.mTween(_this.settings.imgParObj,{'translateX': -_this.width},400,'linear');
-				_this.index = num;
-			} else {
-				disX>0? move.mTween(_this.settings.imgParObj,{'translateX': -_this.width},400,'linear'):
-					move.mTween(_this.settings.imgParObj,{'translateX': 0},400,'linear');
-			}
+			_this.touchsEnd(disX);
 		});
 		
+	}
+	TabImg.prototype.touchStart = function (ev) {
+		var touchs = ev.changedTouches[0];
+		clearInterval(this.timer)
+		return touchs.pageX;
+	}
+	TabImg.prototype.touchsMove = function(ev,disX,startX) {
+		
+		var touchs = ev.changedTouches[0];
+		disX = touchs.pageX - startX;
+		if ( disX>0 ) {
+			num = this.index -1;
+			num = num<0? this.settings.data.length-1: num;
+			
+			this.imgs[1].src = this.settings.data[this.index];
+			
+			this.imgs[0].src = this.settings.data[num];
+			move.css(this.settings.imgParObj,'translateX',-this.width+disX);
+		
+		} else if ( disX<0 ) {
+			num = this.index +1;
+			num %= this.settings.data.length;
+			
+			this.imgs[0].src = this.settings.data[this.index];
+			
+			this.imgs[1].src = this.settings.data[num];
+			move.css(this.settings.imgParObj,'translateX',disX);
+		}
+		return disX;
+	}
+	TabImg.prototype.touchsEnd = function (disX) {
+		if ( Math.abs(disX) >= this.width/3 ) {
+			disX>0? move.mTween(this.settings.imgParObj,{'translateX': 0},400,'linear'):
+				move.mTween(this.settings.imgParObj,{'translateX': -this.width},400,'linear');
+			this.index = num;
+		} else {
+			disX>0? move.mTween(this.settings.imgParObj,{'translateX': -this.width},400,'linear'):
+				move.mTween(this.settings.imgParObj,{'translateX': 0},400,'linear');
+		}
 	}
 	TabImg.prototype.overOutPar = function () {
 		var _this = this;
 		this.obj.addEventListener('mouseenter',function(){
 			clearInterval(_this.timer);
 		});
+		
 		this.obj.addEventListener('mouseleave',function(){
 			clearInterval(_this.timer);
 			_this.timer = setInterval(function(){
@@ -118,7 +128,8 @@
 				} else if (activeObj.index < this.index ) {
 					_this.nextBtn(this.index);
 				}
-			})
+			});
+			
 		}
 	}
 	TabImg.prototype.nextPrevBtn = function () {
@@ -175,6 +186,25 @@
 		}
 	}
 	
+	TabImg.prototype.extend = function (obj1,obj2,onOff) {
+		if ( arguments.length === 1 && window.toString.call(arguments[0]) === '[object Object]' ) {
+			this.extend(this.__proto__,arguments[0]);
+		} else {
+			obj1 = obj1 || {};
+			for ( var attr in obj2 ) {
+				if ( obj2.hasOwnProperty(attr) ) {
+					if ( typeof obj2[attr] === 'object' && onOff ) {//真: 深度克隆
+						obj1[attr] = Array.isArray(obj2[attr])? []: {};
+						extend(obj1[attr],obj2[attr],onOff);
+					} else {
+						obj1[attr] = obj2[attr];
+					}
+				}
+			}
+			return obj1;
+		}
+	}
+	
 	/*鼠标轮动页面组件
 		1. 
 	 * */
@@ -189,7 +219,7 @@
 		init: function (json) {
 			if (json) this.settings = extend(this.settings,json); 
 			this.scrollMouse();
-			this.touchMove();
+			this.touchFn();
 		},
 		scrollMouse: function () {
 			var _this = this;
@@ -223,7 +253,7 @@
 				callBack(upDown);
 			}
 		},
-		touchMove: function (callBack) {
+		touchFn: function (callBack) {
 			var _this = this;
 			var disY, nowY, lastTime, disTime, lastMouse, disMouse;
 			
@@ -277,6 +307,30 @@
 			}
 		}
 		return obj1;
+	}
+	
+	
+	/*canvas鼠标事件
+		1. 
+	 * */
+	window.ImgEvent = function(canvas,x,y) {
+		/*如果x,y这个位置有颜色就返回false，没有颜色返回true*/
+		var cxt = canvas.getContext('2d');
+		var height = canvas.height;
+		var width = canvas.width;
+		var oTop = canvas.getBoundingClientRect().top;
+		var oLeft = canvas.getBoundingClientRect().left;
+		
+		var data = cxt.getImageData(0,0,width,height).data;
+		var arrOpacity = [];
+		for ( var i=0; i<data.length/4; i++ ) {
+			var num = i%width
+			if ( i%width == 0 ) {
+				arrOpacity[Math.floor(i/width)] = [];
+			}
+			arrOpacity[Math.floor(i/width)].push(data[i*4+3]); 
+		}
+		return arrOpacity[Math.round(y-oTop)][Math.round(x-oLeft)] === 0? true: false;
 	}
 	
 })()

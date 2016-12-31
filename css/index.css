@@ -551,7 +551,7 @@ body.contact #hint {
 	transform: rotate(-45deg);
 	-webkit-transform: rotate(-45deg);
 }
-#hint .showText {
+#hint .contChild {
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -559,11 +559,122 @@ body.contact #hint {
 	-webkit-transform: translate(-50%,-50%);
 	width: 70%;
 	height: 70%;
+	text-align: center;
+}
+#hint .showText p {
+	padding: 5px 0;
+	min-height: 39px;
+	border-bottom: 1px solid #ccc;
+	font: 90%/160% arial,'宋体';
+	text-align: left;
+}
+#hint .showText i {
+	display: inline-block;
+	margin: 4px;
+	width: 1px;
+	height: 20px;
+	background-color: #ccc;
+	vertical-align: top;
+}
+body.contact #hint .showText{
+	color: #fff;
+}
+body.contact #hint .showText i {
 	background-color: #fff;
 }
+#hint .smallSwitch {
+	position: relative;
+	margin: 15px auto 0;
+	width: 120px;
+	height: 9px;
+}
+#hint .smallSwitch .line {
+	position: absolute;
+	top: 4px;
+	left: 0;
+	width: 120px;
+	height: 1px;
+	background-color: #ccc;
+}
+#hint .smallSwitch i {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 8px;
+	height: 8px;
+	transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	transition: .5s ease all;
+	border: 1px solid #333;
+	background-color: #fff;
+}
+body.contact #hint .smallSwitch .leftOne,
+body.contact #hint .smallSwitch .rightOne {
+	border: 1px solid #fff;
+	background-color: #333;
+}
+body.contact #hint .smallSwitch .leftTwo,
+body.contact #hint .smallSwitch .rightTwo {
+	border: 1px solid #fff;
+	background-color: #CDAA25;
+}
+#hint .smallSwitch .leftTwo,
+#hint .smallSwitch .rightTwo {
+	border: 1px solid #CDAA25;
+	background-color: #fff;
+}
+#hint .smallSwitch .leftTwo {
+	left: 11px;
+}
+#hint .smallSwitch .rightTwo {
+	left: 99px;
+}
+#hint .smallSwitch .rightOne {
+	right: 3px;
+	left: auto;
+}
+#hint:hover .smallSwitch .leftTwo {
+	left: 99px;
+}
+#hint:hover .smallSwitch .rightTwo {
+	left: 11px;
+}
 
-
-
+#hint .hintBtn {
+	position: relative;
+	display: inline-block;
+	vertical-align: top;
+	margin-top: 15px;
+	width: 92px;
+	height: 32px;
+	line-height: 30px;
+	text-align: center;
+	border: 1px solid #222;
+	background-color: #fff;
+	color: #222;
+}
+#hint .hintBtn span {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 0;
+	height: 100%;
+	overflow: hidden;
+	transition: .7s ease all;
+	-webkit-transition: .7s ease all;
+}
+#hint .hintBtn mark {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 90px;
+	height: 100%;
+	background-color: #222;
+	color: #fff;
+}
+#hint .hintBtn:hover span {
+	width: 90px;
+}
 @media screen and (max-width: 1200px),
 screen and (max-height: 700px) {
 	#logo {
