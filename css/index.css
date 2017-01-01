@@ -71,12 +71,16 @@ body {
 	-webkit-transform: translateX(-50%) rotate(45deg);
 	transform: translateX(-50%) rotate(45deg);
 	z-index: 90;
-	transition: top .7s ease;
-	-webkit-transition: top .7s ease;
+	
 }
 body.home #logo{
 	border: 1px solid #cdcdcd;
 	background: #fff
+}
+body.home #logo,
+body.works #logo {
+	transition: top .7s ease;
+	-webkit-transition: top .7s ease;
 }
 body.works #logo,
 body.about #logo, 
@@ -406,11 +410,8 @@ body.works #footer {
 	width: 30px;
 	height: 30px;
 	background: url(../img/bg/nav.png) no-repeat;
-	/*transform-origin: 50% 50%;*/
-	/*transform: rotate(-45deg);
-	-webkit-transform: rotate(-45deg);*/
-	/*transition: all .7s ease;
-    -webkit-transition: all .7s ease;*/
+	transition: background-position .7s ease;
+    -webkit-transition: background-position .7s ease;
 }
 #nav .navList a:nth-of-type(3) {
 	float: right;
@@ -455,6 +456,10 @@ body.works #footer {
 	margin-bottom: 10px;
     z-index: 20;
     transition: all .7s ease; 
+    -webkit-transition: all .7s ease;
+}
+#footer .blogroll.top {
+	bottom: 47px;
 }
 #footer .blogroll li {
 	position: relative;
@@ -483,7 +488,8 @@ body.works #footer {
     height: 30px;
     -webkit-transform: rotate(-45deg);
     transform: rotate(-45deg);
-    transition: all .7s ease;
+    transition: transparent .7s ease;
+    -webkit-transition: transparent .7s ease;
     background: url(../img/bg/linkIcons.png) no-repeat;
 }
 #footer .linkOne span {

@@ -29,11 +29,12 @@ var aboutData = [
 	
 	
 	//首页个性化方法
-	void function (w,d){
-		var $tabHome = $('#home');
-		if ( $tabHome[0] ) {
+	var $tabHome = $('#home');
+	if ( $tabHome[0] ) {
+		void function (w,d){
+		
 			var imgTab = new TabImg('home');
-			
+			//图片切换
 			imgTab.init({
 				data: ['img/16.jpg','img/17.jpg','img/18.jpg','img/3.jpg','img/4.jpg'],
 				imgParObj: $tabHome.find('.productList')[0],
@@ -48,8 +49,7 @@ var aboutData = [
 					var _this = this;
 					obj.addEventListener('touchstart',function(ev){
 						var ev = ev || event;
-						console.log(ev);
-						console.log(ev.changedTouches[0].pageX,ev.changedTouches[0].pageY)
+						
 						if (ImgEvent(obj,ev.changedTouches[0].pageX,ev.changedTouches[0].pageY)){
 							startX = _this.touchStart(ev);
 						}
@@ -81,9 +81,7 @@ var aboutData = [
 					}
 				})
 				$('#shoes').click(function(ev){
-					
 					var ev = ev || event;
-					
 					if (ImgEvent(this,ev.pageX,ev.pageY)) {
 						factory($productList);
 					}
@@ -109,6 +107,7 @@ var aboutData = [
 				});
 				//creatText(aboutData,$('#hint').find('.showText')[0]);
 				$('#home').find('.productList')[0].onOff = false;
+				$('#footer').find('.blogroll').addClass('top');
 			}
 			//隐藏详情框
 			function fnProductHid() {
@@ -122,10 +121,12 @@ var aboutData = [
 						'opacity': '0'
 					});
 					$('#home').find('.productList')[0].onOff = true;
+					$('#footer').find('.blogroll').removeClass('top');
 				}
 			}
-		}
-	}(window,document);
+		}(window,document);
+	}
+	
 	
 	
 	//works页面个性化方法
@@ -147,7 +148,7 @@ var aboutData = [
 	}(window,document);
 	
 	
-	//works页面个性化方法
+	//about、contact页面个性化方法
 	void function (w,d,factory) {
 		var $tabAbout = $('#about');
 		var $tabContact = $('#contact');
@@ -158,7 +159,6 @@ var aboutData = [
 	}(window,document,function(w,d,$obj,data){
 		if ( $obj[0] ) {
 			$('#hint').css({
-				'opacity': '1',
 				'width':$('#hint').prop('width'),
 				'height':$('#hint').prop('width'),
 				'top': $('#hint').prop('top')
@@ -172,18 +172,18 @@ var aboutData = [
 		if ( $body.hasClass('home') ) {
 			drawLogo('logo');
 			
-			hat.init({now:'loadedData',last:'loadingData'},{time:700});
-			shoes.init({now:'loadedData',last:'loadingData'},{onOff:true,time:700});
+			hat.init({now:'loadedData',last:'loading'},{time:700});
+			shoes.init({now:'loadedData',last:'loading'},{onOff:true,time:700});
 		} else if ($body.hasClass('works') ) {
 			drawLogo('logo','#fff');
 			
 			hat.init({now:'activeData',last:'loading'},{time:700,color:'#1e1e1e'});
-			shoes.init({now:'activeData',last:'loadingData'},{onOff:true,time:700});
+			shoes.init({now:'activeData',last:'loading'},{onOff:true,time:700});
 		} else if ( $body.hasClass('about') || $body.hasClass('contact') ) {
 			drawLogo('logo','#fff');
 			
-			hat.init({now:'activeData'},{time:700,color:'#1e1e1e'});
-			shoes.init({now:'activeData'},{onOff:true,time:700});
+			hat.init({now:'activeData'},{color:'#1e1e1e'});
+			shoes.init({now:'activeData'},{onOff:true});
 		}
 		drawNav('navConvas');
 	}

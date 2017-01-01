@@ -130,24 +130,24 @@
 			];
 		this.loadedData = [
 				{
-					x: -5*this.W,
-					y: -5*this.H
+					x: -5*this.W+.5,
+					y: -5*this.H+.5
 				},
 				{
-					x: this.W*5,
-					y: -5*this.H
+					x: this.W*5+.5,
+					y: -5*this.H+.5
 				},
 				{
-					x: this.W*5,
-					y: -5*this.H+yH
+					x: this.W*5+.5,
+					y: -5*this.H+yH+.5
 				},
 				{
-					x: 0,
-					y: this.H*5
+					x: 0+.5,
+					y: this.H*5+.5
 				},
 				{
-					x: -5*this.W,
-					y: -5*this.H+yH
+					x: -5*this.W+.5,
+					y: -5*this.H+yH+.5
 				}
 			];
 		this.activeData = [
@@ -172,12 +172,12 @@
 					y: -5*this.H+yH
 				}
 			];
-			
+		this.c.width = 10*this.W;
+			this.c.height = 10*this.H;
 	}
 	DrawHat.prototype = {
 		init: function (status,json) {
-			this.c.width = 10*this.W;
-			this.c.height = 10*this.H;
+			
 			this.settings = tools.extend(this.settings,json)
 			var time = time || 600;
 			if ( status.last ) {

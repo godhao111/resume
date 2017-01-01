@@ -105,7 +105,6 @@
 		this.obj.addEventListener('mouseleave',function(){
 			clearInterval(_this.timer);
 			_this.timer = setInterval(function(){
-				_this.settings.callBack();
 				_this.nextBtn();
 			},1600)
 		});
@@ -114,7 +113,7 @@
 		var _this = this;
 		clearInterval(this.timer);
 		this.timer = setInterval(function(){
-			_this.settings.callBack();
+			//_this.settings.callBack();
 			_this.nextBtn();
 		},1600)
 	}
@@ -152,6 +151,7 @@
 		this.imgs[1].src = this.settings.data[num];
 		move.mTween(this.settings.imgParObj,{'translateX': -this.width},400,'linear');
 		this.index = num;
+		this.settings.callBack();
 	}
 	TabImg.prototype.prevBtn = function (num) {
 		num = typeof(num) === 'undefined'? this.index -1: num;
@@ -164,6 +164,7 @@
 		this.imgs[0].src = this.settings.data[num];
 		move.mTween(this.settings.imgParObj,{'translateX': 0},400,'linear');
 		this.index = num;
+		this.settings.callBack();
 	}
 	
 	TabImg.prototype.subCodeClear = function (num) {
