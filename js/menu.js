@@ -21,7 +21,6 @@ $(function(){
 				$menu.removeClass('active');
 				$menuList.removeClass('close');
 			},200)
-			
 		}
 		this.onOff = !this.onOff;
 	});

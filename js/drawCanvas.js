@@ -43,7 +43,7 @@
 		c.width = 10*W;
 		c.height = 10*H;
 		var cxt = c.getContext('2d');
-		console.log()
+		cxt.clearRect(0,0,10*W,10*H);
 		cxt.translate(5*W,5*H);
 		cxt.rotate(-Math.PI*de/180);
 		cxt.save();

@@ -36,12 +36,17 @@
 		this.setTime();
 		this.overOutPar();
 		this.touchFn();
-		
+		this.imgs = this.obj.getElementsByTagName('img');
 		var _this = this;
-		/*window.onresize = function () {
+		//如果home不存在，window上的resize事件绑定
+		
+		window.addEventListener('resize',fnRsize);
+		function fnRsize(){
 			_this.width = document.documentElement.clientWidth || document.body.clientWidth;
-		}*/
-		this.imgs = this.settings.imgParObj.getElementsByTagName('img');
+			if (document.getElementById('home')) {
+				window.removeEventListener('resize',fnRsize);
+			}
+		}
 	}
 	TabImg.prototype.touchFn = function () {
 		var startX, disX, num = 0;
@@ -70,18 +75,18 @@
 			num = this.index -1;
 			num = num<0? this.settings.data.length-1: num;
 			
-			this.imgs[1].src = this.settings.data[this.index];
+			this.imgs[1].src = this.settings.data[this.index].img;
 			
-			this.imgs[0].src = this.settings.data[num];
+			this.imgs[0].src = this.settings.data[num].img;
 			move.css(this.settings.imgParObj,'translateX',-this.width+disX);
 		
 		} else if ( disX<0 ) {
 			num = this.index +1;
 			num %= this.settings.data.length;
 			
-			this.imgs[0].src = this.settings.data[this.index];
+			this.imgs[0].src = this.settings.data[this.index].img;
 			
-			this.imgs[1].src = this.settings.data[num];
+			this.imgs[1].src = this.settings.data[num].img;
 			move.css(this.settings.imgParObj,'translateX',disX);
 		}
 		return disX;
@@ -141,14 +146,19 @@
 		})
 	}
 	TabImg.prototype.nextBtn = function (num) {
+		//如果home不存在，清除定时器
+		if (!document.getElementById('home')) {
+			clearInterval(this.timer);
+			return;
+		};
 		num = typeof(num) === 'undefined'? this.index +1: num;
 		num %= this.settings.data.length;
 		
 		move.css(this.settings.imgParObj,'translateX',0);
-		this.imgs[0].src = this.settings.data[this.index];
+		this.imgs[0].src = this.settings.data[this.index].img;
 		
 		this.subCodeClear(num);
-		this.imgs[1].src = this.settings.data[num];
+		this.imgs[1].src = this.settings.data[num].img;
 		move.mTween(this.settings.imgParObj,{'translateX': -this.width},400,'linear');
 		this.index = num;
 		this.settings.callBack();
@@ -158,10 +168,10 @@
 		num = num<0? this.settings.data.length-1: num;
 		
 		move.css(this.settings.imgParObj,'translateX',-this.width);
-		this.imgs[1].src = this.settings.data[this.index];
+		this.imgs[1].src = this.settings.data[this.index].img;
 		
 		this.subCodeClear(num);
-		this.imgs[0].src = this.settings.data[num];
+		this.imgs[0].src = this.settings.data[num].img;
 		move.mTween(this.settings.imgParObj,{'translateX': 0},400,'linear');
 		this.index = num;
 		this.settings.callBack();

@@ -26,7 +26,7 @@ body *{
 	box-sizing: border-box;
 }
 body {
-	background-color:#fff;
+	background-color:#ccc;
 }
 .screen {
 	width: 100%;
@@ -39,6 +39,17 @@ body {
 /*.loading.works {
 	background-color:#1e1e1e;
 }*/
+body.about, 
+body.contact {
+	background: url(../img/bg/about-contact.jpg) center no-repeat fixed;
+	background-size: cover;
+	-webkit-background-size: cover;
+	transition: background-position 2s ease;
+	-webkit-transition: background-position 2s ease;
+}
+body.contact {
+	background-position: center top;
+}
 .loading #logo {
 	top: 50%;
 	border-color: #cdcdcd
@@ -77,28 +88,11 @@ body.home #logo{
 	border: 1px solid #cdcdcd;
 	background: #fff
 }
-body.home #logo,
-body.works #logo {
-	transition: top .7s ease;
-	-webkit-transition: top .7s ease;
-}
 body.works #logo,
 body.about #logo, 
 body.contact #logo {
 	background-color: #1e1e1e;
 	border: 1px solid #1e1e1e;
-}
-body.about, 
-body.contact {
-	background: url(../img/bg/about-contact.jpg) center no-repeat fixed;
-	background-size: cover;
-	-webkit-background-size: cover;
-	transition: background-position 2s ease;
-	-webkit-transition: background-position 2s ease;
-}
-body.works #header,
-body.works #footer {
-	height: 100px;
 }
 #menu {
 	position: absolute;
@@ -132,7 +126,7 @@ body.works #footer {
 	width: 34px;
 	height: 2px;
 	border-radius: 1px;
-	
+	background-color: #fff;
 	-webkit-transform-origin: 33px center;
 	transform-origin: 33px center;
 	-webkit-transition: .8s;
@@ -141,9 +135,6 @@ body.works #footer {
 .home #menu .btn span,
 #menu.active .btn span {
 	background-color: #333;
-}
-.works #menu .btn span {
-	background-color: #fff;
 }
 #menu .btn .topLine {
 	top: 8px;
@@ -340,7 +331,7 @@ body.works #footer {
 	display: block;
 	clear: both;
 }
-#works li {
+#works .imgList {
 	float: left;
 	width: 50%;
 	overflow: hidden;
