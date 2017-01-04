@@ -74,18 +74,20 @@
 		if ( disX>0 ) {
 			num = this.index -1;
 			num = num<0? this.settings.data.length-1: num;
-			
+			this.imgs[1].parentNode.setAttribute('fileId',data[this.index].id);
 			this.imgs[1].src = this.settings.data[this.index].img;
 			
+			this.imgs[0].parentNode.setAttribute('fileId',data[num].id);
 			this.imgs[0].src = this.settings.data[num].img;
 			move.css(this.settings.imgParObj,'translateX',-this.width+disX);
 		
 		} else if ( disX<0 ) {
 			num = this.index +1;
 			num %= this.settings.data.length;
-			
+			this.imgs[0].parentNode.setAttribute('fileId',data[this.index].id);
 			this.imgs[0].src = this.settings.data[this.index].img;
 			
+			this.imgs[1].parentNode.setAttribute('fileId',data[num].id);
 			this.imgs[1].src = this.settings.data[num].img;
 			move.css(this.settings.imgParObj,'translateX',disX);
 		}
@@ -155,9 +157,11 @@
 		num %= this.settings.data.length;
 		
 		move.css(this.settings.imgParObj,'translateX',0);
+		this.imgs[0].parentNode.setAttribute('fileId',data[this.index].id);
 		this.imgs[0].src = this.settings.data[this.index].img;
 		
 		this.subCodeClear(num);
+		this.imgs[1].parentNode.setAttribute('fileId',data[num].id);
 		this.imgs[1].src = this.settings.data[num].img;
 		move.mTween(this.settings.imgParObj,{'translateX': -this.width},400,'linear');
 		this.index = num;
@@ -168,9 +172,11 @@
 		num = num<0? this.settings.data.length-1: num;
 		
 		move.css(this.settings.imgParObj,'translateX',-this.width);
+		this.imgs[1].parentNode.setAttribute('fileId',data[this.index].id);
 		this.imgs[1].src = this.settings.data[this.index].img;
 		
 		this.subCodeClear(num);
+		this.imgs[0].parentNode.setAttribute('fileId',data[num].id);
 		this.imgs[0].src = this.settings.data[num].img;
 		move.mTween(this.settings.imgParObj,{'translateX': 0},400,'linear');
 		this.index = num;
@@ -230,7 +236,7 @@
 		init: function (json) {
 			if (json) this.settings = extend(this.settings,json); 
 			this.scrollMouse();
-			this.touchFn();
+			this.touchFn(this.obj);
 		},
 		scrollMouse: function () {
 			var _this = this;
@@ -264,18 +270,18 @@
 				callBack(upDown);
 			}
 		},
-		touchFn: function (callBack) {
+		touchFn: function (obj,callBack) {
 			var _this = this;
 			var disY, nowY, lastTime, disTime, lastMouse, disMouse;
 			
 			move.css(this.obj,'translateZ',.01);//作用：优化用3d
 			
-			this.obj.addEventListener('touchstart',function(ev){
+			obj.addEventListener('touchstart',function(ev){
 				var touchs = ev.changedTouches[0];
 				disTime = disMouse = 0;
 				disY = touchs.pageY - move.css(_this.obj,'translateY');
 			})
-			this.obj.addEventListener('touchmove',function(ev){
+			obj.addEventListener('touchmove',function(ev){
 				var touchs = ev.changedTouches[0];
 				var nowTime = new Date().getTime();
 				var nowMouse = touchs.pageY;
@@ -286,21 +292,38 @@
 				disMouse = nowMouse - lastMouse;
 				lastMouse = nowMouse;
 			})
-			this.obj.addEventListener('touchend',function(ev){
+			obj.addEventListener('touchend',function(ev){
 				
 				var s = disMouse / disTime;
 				s = (isNaN(s) || s == 0 )? 0.01: s;
-				var target = parseInt(Math.abs(s*30)-3)*(Math.abs(s*10)/(s*10));
+				var target = parseInt(Math.abs(s*30))*(Math.abs(s*10)/(s*10));
 				
 				nowY  = target + nowY;
 				if ( nowY>=0 ) {
 					nowY = 0;
-				} else if (nowY<=-(this.scrollHeight+140-window.innerHeight)) {
-					nowY=-(this.scrollHeight+140-window.innerHeight);
+				} else if (nowY<=-(_this.obj.scrollHeight+140-window.innerHeight)) {
+					nowY=-(_this.obj.scrollHeight+140-window.innerHeight);
 				}
 				move.mTween(_this.obj,{'translateY':nowY},nowY*20,'easeOut');
-				
 			})
+		},
+		extend: function (obj1,obj2,onOff) {
+			if ( arguments.length === 1 && window.toString.call(arguments[0]) === '[object Object]' ) {
+				this.extend(this.__proto__,arguments[0]);
+			} else {
+				obj1 = obj1 || {};
+				for ( var attr in obj2 ) {
+					if ( obj2.hasOwnProperty(attr) ) {
+						if ( typeof obj2[attr] === 'object' && onOff ) {//真: 深度克隆
+							obj1[attr] = Array.isArray(obj2[attr])? []: {};
+							extend(obj1[attr],obj2[attr],onOff);
+						} else {
+							obj1[attr] = obj2[attr];
+						}
+					}
+				}
+				return obj1;
+			}
 		}
 	}
 	

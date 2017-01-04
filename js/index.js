@@ -149,32 +149,41 @@ var lastHatstatus = 'loading';
 		
 		//点击图片，弹出/隐藏详情框
 		;(function(factory) {
-			var $productList = $('#home').find('.productList');
-			$productList[0].onOff = true;
+			var $productList = $('#home').find('.productList').find('li');
+			$productList[0].parentNode.onOff = true;
 			$productList.on('click',function(ev){
+				var fileId = $(this).attr('fileId');
+				console.log(fileId);
 				factory($productList);
 			})
 			$('#hat').click(function(ev){
 				var ev = ev || event;
 				if (ImgEvent(this,ev.pageX,ev.pageY)) {
-					factory($productList);
+					
+					var li = findEle($productList,ev.pageX,ev.pageY);
+					var fileId = $(li).attr('fileId');
+					factory($productList,fileId);
 				}
 			})
 			$('#shoes').click(function(ev){
 				var ev = ev || event;
 				if (ImgEvent(this,ev.pageX,ev.pageY)) {
-					factory($productList);
+					
+					var li = findEle($productList,ev.pageX,ev.pageY);
+					var fileId = $(li).attr('fileId');
+					factory($productList,fileId);
 				}
 			})
-		})(function($productList){
-			if ( $productList[0].onOff ) {
-				fnProductShow();
+		})(function($productList,fileId){
+			if ( $productList[0].parentNode.onOff ) {
+				fnProductShow(fileId);
 			} else {
 				fnProductHid();
 			}
 		});
 		//弹出详情框
 		function fnProductShow() {
+			if (!$('#home')[0]) return;
 			hat.init({now:'activeData',last:'loadedData'},{time:500});
 			shoes.init({now:'activeData',last:'loadedData'},{onOff:true,time:500});
 			$('#hint').css({
@@ -185,7 +194,6 @@ var lastHatstatus = 'loading';
 				'height':$('#hint').prop('width'),
 				'top': $('#hint').prop('top')
 			});
-			console.log($('#hint').prop('top'));
 			//creatText(aboutData,$('#hint').find('.showText')[0]);
 			$('#home').find('.productList')[0].onOff = false;
 			$('#footer').find('.blogroll').addClass('top');
@@ -212,7 +220,7 @@ var lastHatstatus = 'loading';
 			
 			str += '<span class="prev"></span>'+
 					'<span class="next"></span><ul class="productList">';
-			str +=	'<li><img src="'+data[0].img+'"/></li><li><img src="'+data[1].img+'"/></li>'	
+			str +=	'<li fileId="'+data[0].id+'"><img src="'+data[0].img+'"/></li><li fileId="'+data[1].id+'"><img src="'+data[1].img+'"/></li>'	
 			str +=	'</ul><p class="subCode"></p>';
 			
 			$tabHome.html(str);
@@ -224,6 +232,23 @@ var lastHatstatus = 'loading';
 		
 		var listWheel = new Scroll('works');
 		listWheel.init();
+		listWheel.extend({
+			a: function(obj){
+				var _this = this;
+				//obj.addEventListener('touchstart',function(ev){
+					//var ev = ev || event;
+					
+					//if (ImgEvent(obj,ev.changedTouches[0].pageX,ev.changedTouches[0].pageY)){
+						_this.touchFn(obj);
+					//}
+				//});
+			}
+		})
+		listWheel.a($('#hat')[0]);
+		listWheel.a($('#shoes')[0]);
+		
+		
+		
 		
 		rander(worksData,$tabWorks);
 		var $aAs = $tabWorks.find('a');
@@ -234,7 +259,29 @@ var lastHatstatus = 'loading';
 		$aAs.on('mouseout',function(){
 			$(this).css({'transform':'scale(1)','-webkit-transform':'scale(1)'});
 		});
-			
+		
+		canvasClick();
+		//点击上下canvas操作
+		function canvasClick(obj) {
+			$('#hat').click(function(ev){
+				var ev = ev || event;
+				if (ImgEvent(this,ev.pageX,ev.pageY)) {
+					
+					var a = findEle($tabWorks.find('a'),ev.pageX,ev.pageY);
+					window.location.href = a.href;
+				}
+			})
+			$('#shoes').click(function(ev){
+				var ev = ev || event;
+				if (ImgEvent(this,ev.pageX,ev.pageY)) {
+					
+					var a = findEle($tabWorks.find('a'),ev.pageX,ev.pageY);
+					window.location.href = a.href;
+				}
+			})
+		}
+		
+		
 		function rander(data,obj) {
 			var str = '';
 			for ( var i=0; i<worksData.length; i++ ) {
@@ -315,7 +362,6 @@ var lastHatstatus = 'loading';
 		
 		var a = Math.sqrt(Math.pow(c,2)/2);
 		
-		
 		var hintTop = (c-a)/2 + disTop;
 		
 		$('#hint').css({
@@ -340,6 +386,22 @@ var lastHatstatus = 'loading';
 		lastHatstatus = nowStatus;
 	}
 	
+	//查找对应位置的元素
+	function findEle(targetList,pageX,pageY) {
+		var eleRect,t,b,l,r,s;
+		for ( var i=0; i<targetList.length; i++ ) {
+			eleRect = targetList[i].getBoundingClientRect();
+			s = targetList[i].scrollTop;
+			t = eleRect.top;
+			b = eleRect.bottom;
+			l = eleRect.left;
+			r = eleRect.right;
+			if ( s+t<pageY && s+b>pageY && l<pageX && r>pageX) {
+				return targetList[i];
+			}
+		}
+		return null;
+	}
 	//设置底部的链接列表top
 	function setBlogroll (falg) {
 		if (falg) {

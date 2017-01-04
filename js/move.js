@@ -180,7 +180,7 @@ var move = (function(){
 		css: function (obj,attr,val) {
 			var trArr = ['rotate','rotateX','rotateY','rotateZ','scale','scaleX','scaleY','skew','skewX','skewY','translate','translateX','translateY','translateZ'];
 			if ( trArr.indexOf(attr) != -1 ){
-				if ( arguments.length == 2 ){
+				if ( arguments.length === 2 ){
 					
 					return moveFn.cssTransfrom(obj,attr);
 				} else {

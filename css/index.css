@@ -718,7 +718,7 @@ screen and (max-height: 700px) {
 		/*position: absolute*/
 	}
 	
-	#works li {
+	#works .imgList {
 		width: 100%;
 	}
 }
